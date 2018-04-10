@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Driver {
 
 	public static void main(String[] args) {
@@ -20,44 +19,37 @@ public class Driver {
 		//System.out.println(x.returnItem("chair"));
 		//System.out.println(x.numItems());
 		
-		/*
 		while(true) {
 			System.out.print("Type a command: ");
-			Scanner s = new Scanner(System.in);
+			Scanner s1 = new Scanner(System.in);
 			
-			String userSentence = s.nextLine();
+			String userSentence = s1.nextLine();
 			
 			String word[] = userSentence.split(" ");
 			
 			
 			if(word[0].equals("quit")) {
-				break;
-			}
+					break;
+				}
 			else if(word[0].equals("look")) {
 				
-				System.out.println(x.getDescription());
-				for(Item n: x.getCollections()) {
-					System.out.println(n.getName());
-				}
+				System.out.println("The description of the location is: " + x.getDescription());
+				x.printNames();
 				System.out.println();
 			}
 			
 			else if(word[0].equals("examine")) {
-				for(Item n: x.getCollections()) {
-					if(word[0].equals("examine") && word[1].equals(n.getName())) {
-						System.out.println(n.getName());
-						System.out.println(n.getDescription());
-					}
+				if(x.itemPresent(word[1])) {
+					//System.out.println(word[1]);
+					//System.out.println(x.getDescription());
 				}
-				}
-			
-			
+			}
 			else {
 				System.out.println("I don't know how to do that.");
 				System.out.println();
 			}
 		}
-		*/
+		
 	}
 		
 }

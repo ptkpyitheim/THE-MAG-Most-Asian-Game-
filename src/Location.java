@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Location {
 	private String name;
@@ -74,5 +73,11 @@ public class Location {
 			}
 		}
 		return null;
+	}
+	
+	public void printNames() {
+		for(Item e: collections) {
+			System.out.println(e.getName());
+		}
 	}
 }
