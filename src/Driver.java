@@ -15,10 +15,6 @@ public class Driver {
 		x.addItem(r);
 		x.addItem(s);
 		
-		//System.out.println(x.itemPresent("loc"));
-		//System.out.println(x.returnItem("chair"));
-		//System.out.println(x.numItems());
-		
 		while(true) {
 			System.out.print("Type a command: ");
 			Scanner s1 = new Scanner(System.in);
