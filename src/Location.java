@@ -28,6 +28,7 @@ public class Location {
 		description = pDescription;
 	}
 	
+	//Methods
 	public void addItem(Item s) {
 		// add an Item to the location’s collection
 		collections.add(s);
@@ -43,11 +44,13 @@ public class Location {
 		return false;
 	}
 	
-	public Item returnitem(String d) {
+	public Item returnItem(String d) {
 		// return the item (if it’s present) from the location’s collection by searching using the item’s name
-		for(Item e: collections) {
-			if(e.getName().equals(d)) {
-				System.out.println(e);
+		if(itemPresent(d)){
+			for(Item e: collections) {
+				if(e.getName().equals(d)) {
+					return e;
+				}
 			}
 		}
 		return null;
