@@ -35,20 +35,20 @@ public class Location {
 	
 	public boolean itemPresent(String s) { 
 		// return whether an item is present in the location’s collection by searching using the item’s name
-		Scanner p = new Scanner(s);
-		String word = p.next();
 		for(Item e: collections) {
-			if(collections.contains(word)) {
+			if(e.getName().equals(s)) {
 				return true;
 			}
 		}
-			return false;
+		return false;
 	}
 	
 	public Item returnitem(String d) {
 		// return the item (if it’s present) from the location’s collection by searching using the item’s name
-		if(itemPresent(d)) {
-			return ;
+		for(Item e: collections) {
+			if(e.getName().equals(d)) {
+				System.out.println(e);
+			}
 		}
 		return null;
 	}
@@ -62,13 +62,13 @@ public class Location {
 		return numItems;
 	}
 	
-	public Item removeItem(Item s) {
+	public Item removeItem(String s) {
 		 //remove (and return) the item within a location’s collection by searching using the item’s name.
 		for (Item e: collections) {
-			if(collections.contains(s)) {
-				return s;
+			if(e.getName().equals(s)) {
+				collections.remove(e);
+				return e;
 			}
-			collections.remove(s);
 		}
 		return null;
 	}
