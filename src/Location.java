@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Location {
 	private String name;
@@ -32,20 +33,22 @@ public class Location {
 		collections.add(s);
 	}
 	
-	public boolean itemPresent(Item s) { 
+	public boolean itemPresent(String s) { 
 		// return whether an item is present in the location’s collection by searching using the item’s name
+		Scanner p = new Scanner(s);
+		String word = p.next();
 		for(Item e: collections) {
-			if(collections.contains(s)) {
+			if(collections.contains(word)) {
 				return true;
 			}
 		}
 			return false;
 	}
 	
-	public Item returnitem(Item d) {
+	public Item returnitem(String d) {
 		// return the item (if it’s present) from the location’s collection by searching using the item’s name
-		if(itemPresent(d) == true) {
-			return d;
+		if(itemPresent(d)) {
+			return ;
 		}
 		return null;
 	}
