@@ -10,6 +10,7 @@ public class Item {
 		description = pDescription;
 	}
 	
+	//Getters ________________________________________________________________
 	public String getName() {
 		return name;
 	}
@@ -19,6 +20,8 @@ public class Item {
 	public String getDescription() {
 		return description;
 	}
+	
+	//Setters ________________________________________________________________
 	public void setName(String pName) {
 		name = pName;
 	}
@@ -29,6 +32,7 @@ public class Item {
 		description = pDescription;
 	}
 	
+	//toString() method ________________________________________________________________
 	public String toString() {
 		String ret = " ";
 		ret += "Item: \n";

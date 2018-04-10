@@ -5,21 +5,21 @@ public class Location {
 	private String description;
 	private ArrayList<Item> collections; //collections of Items
 	
-	//Constructor
+	//Constructor ________________________________________________________________
 	public Location(String pName, String pDescription) {
 		name = pName;
 		description = pDescription;
 		collections = new ArrayList<Item>();
 	}
 	
-	//Getters
+	//Getters ________________________________________________________________
 	public String getName() {
 		return name;
 	}
 	public String getDescription() {
 		return description;
 	}
-	//Setters
+	//Setters ________________________________________________________________
 	public void setName(String pName) {
 		name = pName;
 	}
@@ -27,7 +27,8 @@ public class Location {
 		description = pDescription;
 	}
 	
-	//Methods
+	//Methods ________________________________________________________________
+	
 	public void addItem(Item s) {
 		// add an Item to the location’s collection
 		collections.add(s);
@@ -76,8 +77,11 @@ public class Location {
 	}
 	
 	public void printNames() {
+		//Prints out all the names of the items in the location class.
+		int i = 1;	
 		for(Item e: collections) {
-			System.out.println(e.getName());
-		}
+				System.out.println(i++ + ") " + e.getName());
+			}
 	}
+	
 }
