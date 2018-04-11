@@ -78,9 +78,10 @@ public class Location {
 	
 	public void printNames() {
 		//Prints out all the names of the items in the location class.
-		int i = 1;	
+		int i = 0;	
 		for(Item e: collections) {
-				System.out.println(i++ + ") " + e.getName());
+				i++;
+				System.out.println(i + ") " + e.getName());
 			}
 	}
 	
