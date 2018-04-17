@@ -15,15 +15,21 @@ public class Driver {
 		x.addItem(r);
 		x.addItem(s);
 		
+		Scanner s1;
+		System.out.println("***** Welcome to the game! *****\n");
+		System.out.println("Type 'look' to see what items are in the location.\n" + 
+				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
+				"    Type 'quit' to quit the game.\n");
+		
 		while(true) {
 			System.out.print("Type a command: ");
-			Scanner s1 = new Scanner(System.in);
+			s1 = new Scanner(System.in);
 			String userSentence = s1.nextLine();
 			String word[] = userSentence.split(" ");
 			
 			if(word[0].equals("quit")) {
 				//If the command is “quit”, the loop should exit and the program ends
-				
+				System.out.println("You have successfully quit the game.");
 				break;
 			}
 			
@@ -52,8 +58,7 @@ public class Driver {
 	
 			else {
 				//If the command is something else
-				System.out.println("I don't know how to do that. Please try another command.");
-				System.out.println();
+				System.out.println("I don't know how to do that. Please try another command listed above.\n");
 			}
 		}
 		

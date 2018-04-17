@@ -46,11 +46,9 @@ public class Location {
 	
 	public Item returnItem(String d) {
 		// return the item (if it’s present) from the location’s collection by searching using the item’s name
-		if(itemPresent(d)){
-			for(Item e: collections) {
-				if(e.getName().equals(d)) {
-					return e;
-				}
+		for(Item e: collections) {
+			if(e.getName().equals(d)) {
+				return e;
 			}
 		}
 		return null;
@@ -58,11 +56,7 @@ public class Location {
 	
 	public int numItems() {
 		// get a count of the number of items in the location’s collection.
-		int numItems = 0;
-		for (Item e: collections) {
-			numItems++;
-		}
-		return numItems;
+		return collections.size();
 	}
 	
 	public Item removeItem(String s) {
