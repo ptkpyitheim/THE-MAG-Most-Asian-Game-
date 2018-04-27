@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Driver {
+	
+	public static String myLocation;
+	public static ArrayList<Item> myInventory= new ArrayList<Item>();
 
 	public static void main(String[] args) {
 		
@@ -14,6 +18,13 @@ public class Driver {
 		x.addItem(q);
 		x.addItem(r);
 		x.addItem(s);
+		
+		ContainerItem a = new ContainerItem("Cabinet", "kitchen", "Stores kitchen items");
+		ContainerItem b = new ContainerItem("Vault", "Money keeper", "Keeps money");
+		a.addItem(q);
+		a.addItem(s);
+		b.addItem(p);
+		b.addItem(r);
 		
 		Scanner s1;
 		System.out.println("***** Welcome to the game! *****\n");
@@ -56,6 +67,9 @@ public class Driver {
 				}
 			}
 	
+			else if(word[0].equals("take")) {
+				if()
+			}
 			else {
 				//If the command is something else
 				System.out.println("I don't know how to do that. Please try another command listed above.\n");
