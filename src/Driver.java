@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Driver {
 	
-	public static String myLocation;
-	public static ArrayList<Item> myInventory= new ArrayList<Item>();
+	public static Location myLocation; //to keep track of location
+	public static ContainerItem myInventory; //to keep track of Inventory
 
 	public static void main(String[] args) {
 		
@@ -26,6 +26,7 @@ public class Driver {
 		b.addItem(p);
 		b.addItem(r);
 		
+		
 		Scanner s1;
 		System.out.println("***** Welcome to the game! *****\n");
 		System.out.println("Type 'look' to see what items are in the location.\n" + 
@@ -44,16 +45,18 @@ public class Driver {
 				break;
 			}
 			
-			else if(word[0].equals("look")) {
+			switch(word[0]) {
+			case "look": {
 				//If the command is “look”, print out the description of the location and just the names of each items found there
 				
 				System.out.println("The description of the location is: " + x.getDescription());
 				System.out.println("The items in the class are: ");
 				x.printNames();
 				System.out.println();
+				break;
 			}
 			
-			else if(word[0].equals("examine")) {
+			case "examine": {
 				//If the command is “examine NAME”, get the item with the given name from the location 
 				//and print its name and description to the screen.
 				
@@ -65,16 +68,30 @@ public class Driver {
 					n += "\n" + "Description: " + x.returnItem(word[1]).getDescription() + "\n";
 					System.out.println(n);
 				}
+				break;
 			}
-	
-			else if(word[0].equals("take")) {
-				if()
+			
+			case "take": {
+				if(!x.itemPresent(word[1])) {
+					System.out.println("Item is not in this location." + "\n" + "Please try again below.");
+				}
+				else {
+					myInventory.addItem(x.returnItem(word[1]));
+					x.removeItem(word[1]);
+					System.out.println(word[1] + " is in your backpack.");
+					
+				}
 			}
-			else {
+			
+			default: {
+				//if nothing else matches this is what you should do.
 				//If the command is something else
 				System.out.println("I don't know how to do that. Please try another command listed above.\n");
+				break;
 			}
+			};
 		}
+		
 		
 	}
 		

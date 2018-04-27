@@ -26,10 +26,7 @@ public class ContainerItem extends Item {
 		}
 		return null;
 	}
-	
-	//Have to write the method below
-	//A method to remove and return Item from the collection when the method is provided the index of the Item to remove
-	
+		
 	public int itemsCount() {
 		//A method that returns a count of how many items are in the collection
 		return myList.size();
