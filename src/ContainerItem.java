@@ -4,7 +4,6 @@ public class ContainerItem extends Item {
 	
 	private ArrayList<Item> myList = new ArrayList<Item>();
 	
-	
 	public ContainerItem(String pName, String pType, String pDescription) {
 		//not sure if we need a constructor for this.
 		super(pName, pType, pDescription);
@@ -52,6 +51,24 @@ public class ContainerItem extends Item {
 		return null;
 	}
 	
+	public Item itemReturn(String d) {
+		// return the item (if it’s present) from the ContainerItem’s ArrayList by searching using the item’s name
+		for(Item e: myList) {
+			if(e.getName().equals(d)) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	public void listItems() {
+		//Prints out all the names of the items in the ContainerItem class.
+		int i = 0;	
+		for(Item e: myList) {
+				i++;
+				System.out.println(i + ") " + e.getName());
+			}
+	}
 	
 	
 }

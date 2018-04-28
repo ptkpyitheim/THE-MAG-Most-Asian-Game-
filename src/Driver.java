@@ -3,10 +3,11 @@ import java.util.Scanner;
 
 public class Driver {
 	
-	public static Location myLocation; //to keep track of location
-	public static ContainerItem myInventory; //to keep track of Inventory
+	public static Location myLocation = null; //to keep track of location
+	public static ContainerItem myInventory = null; //to keep track of Inventory
 
 	public static void main(String[] args) {
+		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
 		
 		Item p = new Item("loc", "human", "lab partner");
 		Item q = new Item("knife", "sharp", "Kill a person");
@@ -19,8 +20,8 @@ public class Driver {
 		x.addItem(r);
 		x.addItem(s);
 		
-		ContainerItem a = new ContainerItem("Cabinet", "kitchen", "Stores kitchen items");
-		ContainerItem b = new ContainerItem("Vault", "Money keeper", "Keeps money");
+		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
+		ContainerItem b = new ContainerItem("Chest", "Box", "Store valuable things");
 		a.addItem(q);
 		a.addItem(s);
 		b.addItem(p);
@@ -48,11 +49,15 @@ public class Driver {
 			switch(word[0]) {
 			case "look": {
 				//If the command is “look”, print out the description of the location and just the names of each items found there
-				
-				System.out.println("The description of the location is: " + x.getDescription());
-				System.out.println("The items in the class are: ");
-				x.printNames();
-				System.out.println();
+				if(word.length == 1) {
+					System.out.println("The description of the location is: " + x.getDescription());
+					System.out.println("The items in the class are: ");
+					x.printNames();
+					System.out.println();
+				}
+				else {
+					System.out.println("I don't know how to do that. Please try another command listed above. \n");
+				}
 				break;
 			}
 			
@@ -72,15 +77,55 @@ public class Driver {
 			}
 			
 			case "take": {
-				if(!x.itemPresent(word[1])) {
-					System.out.println("Item is not in this location." + "\n" + "Please try again below.");
+				//If there is an item with the [name] in your character’s current location, remove this item from
+				//the current location and add it to the character’s inventory
+				
+				
+				if(word.length == 2) {
+					if(!x.itemPresent(word[1])) {
+						System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
+					}
+					else {
+						System.out.println(x.returnItem(word[1]));
+						myInventory.addItem(x.returnItem(word[1]));
+						x.removeItem(word[1]);
+						System.out.println("The item " + word[1] + " is now in your backpack.");
+						System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+					}
+				}
+				else if(word.length == 4) {
+					// If there is an item with the given [name] in the specified [container] at
+					//your character’s current location, remove it from the [container] and add it to the character’s inventory (e.g.,
+				    //take key from chest)
+					
+					//if(word[1])
+				}
+				break;
+			}
+			
+			case "drop": {
+			//If there is an item with the given [name] in your character’s inventory, remove it from the
+			//character’s inventory and add it to the current location. 
+				if(!myInventory.presentItem(word[1])) {
+					System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
 				}
 				else {
-					myInventory.addItem(x.returnItem(word[1]));
-					x.removeItem(word[1]);
-					System.out.println(word[1] + " is in your backpack.");
-					
+					x.addItem(myInventory.itemReturn(word[1]));
+					myInventory.remove(word[1]);
+					System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
 				}
+				
+				break;
+			}
+			
+			case "inventory": {
+				if (word.length==1) {
+					if(myInventory.)
+					myInventory.listItems();
+				}
+				System.out.println("\n");
+				
+				break;
 			}
 			
 			default: {
