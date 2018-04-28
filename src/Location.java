@@ -4,12 +4,14 @@ public class Location {
 	private String name;
 	private String description;
 	private ArrayList<Item> collections; //collections of Items
+	private ArrayList<ContainerItem> containerLoc;
 	
 	//Constructor ________________________________________________________________
 	public Location(String pName, String pDescription) {
 		name = pName;
 		description = pDescription;
 		collections = new ArrayList<Item>();
+		containerLoc = new ArrayList<ContainerItem>();
 	}
 	
 	//Getters ________________________________________________________________
@@ -77,6 +79,32 @@ public class Location {
 				i++;
 				System.out.println(i + ") " + e.getName());
 			}
+	}
+	
+	//**** Below codes are for the container
+	
+	public void addContainer(ContainerItem s) {
+		containerLoc.add(s);
+	}
+	
+	public boolean containerPresent(String s) {
+		//checks if a container contains in the specified location
+		
+		for(ContainerItem e: containerLoc) {
+			if(s.equals(e.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public ContainerItem returnCon(String s){
+		for(ContainerItem e: containerLoc){
+			if(s.equals(e.getName())){
+				return e;
+			}
+		}
+		return null;
 	}
 	
 }

@@ -7,9 +7,11 @@ public class Driver {
 	public static Location myLocation = null; //to keep track of location
 	public static ContainerItem myInventory = null; //to keep track of Inventory
 	
-	private static HashMap<String, String> mapLoc; //maps Location with ContainerItems
+	//private static HashMap<String, String> mapLoc; //maps Location with ContainerItems
 
 	public static void main(String[] args) {
+		
+		myLocation = new Location(" ", " ");
 		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
 		
 		Item p = new Item("loc", "human", "lab partner");
@@ -27,12 +29,12 @@ public class Driver {
 		ContainerItem b = new ContainerItem("Chest", "Box", "Store valuable things");
 		a.addItem(q);
 		a.addItem(s);
+		
 		b.addItem(p);
 		b.addItem(r);
 		
-		mapLoc = new HashMap<String, String>();
-		mapLoc.put(x.getName(), a.getName());
-		mapLoc.put(x.getName(), b.getName());
+		x.addContainer(a);
+		x.addContainer(b);
 		
 		
 		Scanner s1;
@@ -40,6 +42,7 @@ public class Driver {
 		System.out.println("Type 'look' to see what items are in the location.\n" + 
 				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
 				"    Type 'quit' to quit the game.\n");
+		myLocation = x;
 		
 		while(true) {
 			System.out.print("Type a command: ");
@@ -59,7 +62,7 @@ public class Driver {
 				if(word.length == 1) {
 					System.out.println("The description of the location is: " + x.getDescription());
 					System.out.println("The items in the class are: ");
-					x.printNames();
+					myLocation.printNames();
 					System.out.println();
 				}
 				else {
@@ -72,12 +75,12 @@ public class Driver {
 				//If the command is “examine NAME”, get the item with the given name from the location 
 				//and print its name and description to the screen.
 				
-				if(!x.itemPresent(word[1])) {
+				if(!myLocation.itemPresent(word[1])) {
 					System.out.println("Item is not in this location." + "\n" + "Please try again below.");
 				}
 				else {
-					String n = "Name: " + x.returnItem(word[1]).getName();
-					n += "\n" + "Description: " + x.returnItem(word[1]).getDescription() + "\n";
+					String n = "Name: " + myLocation.returnItem(word[1]).getName();
+					n += "\n" + "Description: " + myLocation.returnItem(word[1]).getDescription() + "\n";
 					System.out.println(n);
 				}
 				break;
@@ -87,45 +90,31 @@ public class Driver {
 				//If there is an item with the [name] in your character’s current location, remove this item from
 				//the current location and add it to the character’s inventory
 				
-				
 				if(word.length == 2) {
-					if(!x.itemPresent(word[1])) {
+					if(!myLocation.itemPresent(word[1])) {
 						System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
 					}
 					else {
-						System.out.println(x.returnItem(word[1]));
-						myInventory.addItem(x.returnItem(word[1]));
-						x.removeItem(word[1]);
+						System.out.println(myLocation.returnItem(word[1]));
+						myInventory.addItem(myLocation.returnItem(word[1]));
+						myLocation.removeItem(word[1]);
 						System.out.println("The item " + word[1] + " is now in your backpack.");
 						System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
 					}
 				}
-				else if(word.length == 4) {
+				else if(word.length == 4 && word[2]=="from") {
 					// If there is an item with the given [name] in the specified [container] at
 					//your character’s current location, remove it from the [container] and add it to the character’s inventory (e.g.,
 				    //take key from chest)
-					
-					for(String e: mapLoc.keySet()) {
-						if(mapLoc.containsValue(word[4])) {
-							if(mapLoc.get().presentItem(word[2])) {
-								
-							}
-							
-							
-							
-							
-							if(!x.itemPresent()) {
-								System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
-							}
-							else {
-								System.out.println(x.returnItem(word[1]));
-								myInventory.addItem(x.returnItem(word[1]));
-								x.removeItem(word[1]);
-								System.out.println("The item " + word[1] + " is now in your backpack.");
-								System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
-							}
+					if(myLocation.containerPresent(word[3])) {
+						if(myLocation.returnCon(word[3]).presentItem(word[1])){
+							myInventory.addItem(myLocation.returnCon(word[3]).itemReturn(word[3]));
+							myLocation.returnCon(word[3]).remove(word[1]);
+							System.out.println("The item " + word[1] + " is now in your backpack.");
 						}
 					}
+					System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+					
 				}
 				break;
 			}
@@ -137,7 +126,7 @@ public class Driver {
 					System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
 				}
 				else {
-					x.addItem(myInventory.itemReturn(word[1]));
+					myLocation.addItem(myInventory.itemReturn(word[1]));
 					myInventory.remove(word[1]);
 					System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
 				}
@@ -152,6 +141,7 @@ public class Driver {
 					}
 					else {
 						myInventory.listItems();
+						System.out.println();;
 					}
 				}
 				
