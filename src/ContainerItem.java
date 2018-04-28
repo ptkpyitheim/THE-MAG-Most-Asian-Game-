@@ -32,7 +32,7 @@ public class ContainerItem extends Item {
 	}
 	
 	public boolean presentItem (String s) {
-		//A method that returns whether an Item is in the collection when the method is provided the item’s name
+		//A method that returns whether an Item is in the Container when the method is provided the item’s name
 		for (Item e: myList) {
 			if(e.getName().equals(s)) {
 				return true;

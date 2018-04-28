@@ -1,10 +1,13 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Driver {
 	
 	public static Location myLocation = null; //to keep track of location
 	public static ContainerItem myInventory = null; //to keep track of Inventory
+	
+	private static HashMap<String, String> mapLoc; //maps Location with ContainerItems
 
 	public static void main(String[] args) {
 		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
@@ -26,6 +29,10 @@ public class Driver {
 		a.addItem(s);
 		b.addItem(p);
 		b.addItem(r);
+		
+		mapLoc = new HashMap<String, String>();
+		mapLoc.put(x.getName(), a.getName());
+		mapLoc.put(x.getName(), b.getName());
 		
 		
 		Scanner s1;
@@ -98,7 +105,27 @@ public class Driver {
 					//your character’s current location, remove it from the [container] and add it to the character’s inventory (e.g.,
 				    //take key from chest)
 					
-					//if(word[1])
+					for(String e: mapLoc.keySet()) {
+						if(mapLoc.containsValue(word[4])) {
+							if(mapLoc.get().presentItem(word[2])) {
+								
+							}
+							
+							
+							
+							
+							if(!x.itemPresent()) {
+								System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
+							}
+							else {
+								System.out.println(x.returnItem(word[1]));
+								myInventory.addItem(x.returnItem(word[1]));
+								x.removeItem(word[1]);
+								System.out.println("The item " + word[1] + " is now in your backpack.");
+								System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+							}
+						}
+					}
 				}
 				break;
 			}
@@ -120,10 +147,13 @@ public class Driver {
 			
 			case "inventory": {
 				if (word.length==1) {
-					if(myInventory.)
-					myInventory.listItems();
+					if(myInventory.itemsCount() == 0) {
+						System.out.println(" There is no Item in your backpack \n");
+					}
+					else {
+						myInventory.listItems();
+					}
 				}
-				System.out.println("\n");
 				
 				break;
 			}
