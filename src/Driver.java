@@ -52,8 +52,10 @@ public class Driver {
 			
 			if(word[0].equals("quit")) {
 				//If the command is “quit”, the loop should exit and the program ends
-				System.out.println("You have successfully quit the game.");
-				break;
+				if(word.length==1) {
+					System.out.println("You have successfully quit the game.");
+					break;
+				}
 			}
 			
 			switch(word[0]) {
@@ -102,22 +104,54 @@ public class Driver {
 						System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
 					}
 				}
-				else if(word.length == 4 && word[2]=="from") {
+				else if(word.length == 4 && word[2].equals("from")) {
 					// If there is an item with the given [name] in the specified [container] at
 					//your character’s current location, remove it from the [container] and add it to the character’s inventory (e.g.,
 				    //take key from chest)
+				
 					if(myLocation.containerPresent(word[3])) {
 						if(myLocation.returnCon(word[3]).presentItem(word[1])){
 							myInventory.addItem(myLocation.returnCon(word[3]).itemReturn(word[3]));
 							myLocation.returnCon(word[3]).remove(word[1]);
 							System.out.println("The item " + word[1] + " is now in your backpack.");
 						}
+						else {
+							System.out.println("The item " + word[1] + " is not in the Container. Please try another item.");
+						}
+					}
+					else {
+						System.out.println("The container doesn't exist in this location.");
 					}
 					System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
 					
 				}
 				break;
+				
 			}
+			
+			case "put": {
+				//If there is an item with the given [name] in your character’s inventory, remove
+				//it from the character’s inventory and add it to the specified [container] at the character’s current location. 
+				
+			if(word.length == 4 && word[2].equals("in")) {
+					if(myInventory.presentItem(word[1])) {
+						if(myLocation.containerPresent(word[3])) {
+							myLocation.returnCon(word[3]).addItem(myLocation.returnCon(word[3]).itemReturn(word[1]));
+							myLocation.returnCon(word[3]).remove(word[1]);
+							System.out.println("The " + word[1] + " is added to the " + word[3]);
+							System.out.println("The " + word[1] + " is now removed from your backpack.");
+						}
+						else {
+							System.out.println("The container you are trying to put doesn't exist. Please try another.");
+						}
+					}
+					else {
+							System.out.println("The item doesn't exist in your backpack.");
+						}
+				}
+			break;
+			}
+				
 			
 			case "drop": {
 			//If there is an item with the given [name] in your character’s inventory, remove it from the
@@ -144,7 +178,6 @@ public class Driver {
 						System.out.println();;
 					}
 				}
-				
 				break;
 			}
 			
