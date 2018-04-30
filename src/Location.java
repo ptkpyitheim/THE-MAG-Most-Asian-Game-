@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Location {
 	private String name;
 	private String description;
 	private ArrayList<Item> collections; //collections of Items
 	private ArrayList<ContainerItem> containerLoc;
+	private HashMap<String, Location> direction;
 	
 	//Constructor ________________________________________________________________
 	public Location(String pName, String pDescription) {
@@ -12,6 +14,7 @@ public class Location {
 		description = pDescription;
 		collections = new ArrayList<Item>();
 		containerLoc = new ArrayList<ContainerItem>();
+		direction = new HashMap<String, Location>();
 	}
 	
 	//Getters ________________________________________________________________

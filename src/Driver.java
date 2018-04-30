@@ -11,6 +11,8 @@ public class Driver {
 
 	public static void main(String[] args) {
 		
+		
+		
 		myLocation = new Location(" ", " ");
 		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
 		
@@ -182,7 +184,7 @@ public class Driver {
 			case "inventory": {
 				if (word.length==1) {
 					if(myInventory.itemsCount() == 0) {
-						System.out.println(" There is no Item in your backpack \n");
+						System.out.println(" There is no Items in your backpack \n");
 					}
 					else {
 						myInventory.listItems();
