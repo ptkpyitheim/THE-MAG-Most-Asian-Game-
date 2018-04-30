@@ -20,13 +20,15 @@ public class Driver {
 		Item s = new Item("broom", "weapon", "Sweep the floor");
 		
 		Location x = new Location("DePauw", "Sophomore");
+		/*
 		x.addItem(p);
 		x.addItem(q);
 		x.addItem(r);
 		x.addItem(s);
+		*/
 		
 		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
-		ContainerItem b = new ContainerItem("Chest", "Box", "Store valuable things");
+		ContainerItem b = new ContainerItem("Blah", "Box", "Store valuable things");
 		a.addItem(q);
 		a.addItem(s);
 		
@@ -43,6 +45,7 @@ public class Driver {
 				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
 				"    Type 'quit' to quit the game.\n");
 		myLocation = x;
+		
 		
 		while(true) {
 			System.out.print("Type a command: ");
@@ -78,7 +81,7 @@ public class Driver {
 				//and print its name and description to the screen.
 				
 				if(!myLocation.itemPresent(word[1])) {
-					System.out.println("Item is not in this location." + "\n" + "Please try again below.");
+					System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
 				}
 				else {
 					String n = "Name: " + myLocation.returnItem(word[1]).getName();
@@ -102,6 +105,9 @@ public class Driver {
 						myLocation.removeItem(word[1]);
 						System.out.println("The item " + word[1] + " is now in your backpack.");
 						System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+						System.out.println("The item(s) in your backpack are: ");
+						myInventory.listItems();
+						System.out.println();
 					}
 				}
 				else if(word.length == 4 && word[2].equals("from")) {
@@ -114,6 +120,9 @@ public class Driver {
 							myInventory.addItem(myLocation.returnCon(word[3]).itemReturn(word[3]));
 							myLocation.returnCon(word[3]).remove(word[1]);
 							System.out.println("The item " + word[1] + " is now in your backpack.");
+							System.out.println("The item(s) in your backpack are: ");
+							//myInventory.listItems();
+							System.out.println();
 						}
 						else {
 							System.out.println("The item " + word[1] + " is not in the Container. Please try another item.");
@@ -123,7 +132,6 @@ public class Driver {
 						System.out.println("The container doesn't exist in this location.");
 					}
 					System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
-					
 				}
 				break;
 				
@@ -139,15 +147,18 @@ public class Driver {
 							myLocation.returnCon(word[3]).addItem(myLocation.returnCon(word[3]).itemReturn(word[1]));
 							myLocation.returnCon(word[3]).remove(word[1]);
 							System.out.println("The " + word[1] + " is added to the " + word[3]);
-							System.out.println("The " + word[1] + " is now removed from your backpack.");
+							System.out.println("The " + word[1] + " is now removed from your backpack. \n");
+							System.out.println("The items remaining in your backpack are: ");
+							myInventory.listItems();
+							System.out.println();
 						}
 						else {
 							System.out.println("The container you are trying to put doesn't exist. Please try another.");
 						}
 					}
 					else {
-							System.out.println("The item doesn't exist in your backpack.");
-						}
+							System.out.println("The item doesn't exist in your backpack. \n");
+					}
 				}
 			break;
 			}
