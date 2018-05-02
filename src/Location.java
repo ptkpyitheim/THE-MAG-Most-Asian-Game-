@@ -109,6 +109,18 @@ public class Location {
 		return null;
 	}
 	
+	//*******Methods for HashMap
+	
+	public void addConnection(String s, Location l) {
+		direction.put(s,l);
+	}
+	
+	public Location goDirection(String s) {
+		if(direction.containsKey("s")) {
+			return direction.get(s);
+		}
+		return null;
+	}
 
 	
 }

@@ -6,12 +6,9 @@ public class Driver {
 	
 	public static Location myLocation = null; //to keep track of location
 	public static ContainerItem myInventory = null; //to keep track of Inventory
-	
-	//private static HashMap<String, String> mapLoc; //maps Location with ContainerItems
 
 	public static void main(String[] args) {
 
-		//myLocation = new Location(" ", " ");
 		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
 		
 		Item p = new Item("loc", "human", "lab partner");
@@ -19,27 +16,39 @@ public class Driver {
 		Item r = new Item("chair", "wood", "To sit");
 		Item s = new Item("broom", "weapon", "Sweep the floor");
 		
-		Location x = new Location("DePauw", "Sophomore");
+		//Creating locations
+		Location x = new Location("Burma", " ");
+		Location x1 = new Location("China", " ");
+		Location x2 = new Location("Thailand", " ");
+		Location x3 = new Location("Vietnam", " ");
+		Location x4 = new Location("India", " ");
 		
+		//Add connections to the location
+		x.addConnection("north", x1);
+		x.addConnection("south", x2);
+ 		
+		//adding items to the location
 		x.addItem(r);
 		x.addItem(p);
 		
+		//creating ContainerItems and adding items to them
 		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
 		ContainerItem b = new ContainerItem("Blah", "Box", "Store valuable things");
 		a.addItem(q);
 		a.addItem(s);
 		
+		//Adding containers to the location
 		x.addItem(a);
 		x.addItem(b);
 		
 		
+		//******Game code******
 		Scanner s1;
 		System.out.println("***** Welcome to the game! *****\n");
 		System.out.println("Type 'look' to see what items are in the location.\n" + 
 				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
 				"    Type 'quit' to quit the game.\n");
 		myLocation = x;
-		
 		
 		while(true) {
 			System.out.print("Type a command: ");
