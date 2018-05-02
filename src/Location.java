@@ -116,11 +116,12 @@ public class Location {
 	}
 	
 	public Location goDirection(String s) {
-		if(direction.containsKey("s")) {
+		if(direction.containsKey(s)) {
 			return direction.get(s);
 		}
 		return null;
 	}
+
 
 	
 }

@@ -17,19 +17,61 @@ public class Driver {
 		Item s = new Item("broom", "weapon", "Sweep the floor");
 		
 		//Creating locations
-		Location x = new Location("Burma", " ");
-		Location x1 = new Location("China", " ");
-		Location x2 = new Location("Thailand", " ");
-		Location x3 = new Location("Vietnam", " ");
-		Location x4 = new Location("India", " ");
+		Location B = new Location("Burma", " ");
+		Location C = new Location("China", " ");
+		Location T = new Location("Thailand", " ");
+		Location V = new Location("Vietnam", " ");
+		Location I = new Location("India", " ");
 		
 		//Add connections to the location
-		x.addConnection("north", x1);
-		x.addConnection("south", x2);
+			//Adding connections for Burma
+		B.addConnection("north", C);
+		B.addConnection("south", T);
+		B.addConnection("east", V);
+		B.addConnection("west", I);
+		
+			//Adding connections for China
+		C.addConnection("north", null);
+		C.addConnection("south", B);
+		C.addConnection("east", V);
+		C.addConnection("west", I);
+		
+			//Adding connections for Thailand
+		T.addConnection("north", B);
+		T.addConnection("south", null);
+		T.addConnection("east", V);
+		T.addConnection("west", I);
+		
+			//Adding connections for Vietnam
+		V.addConnection("north", C);
+		V.addConnection("south", T);
+		V.addConnection("east",null);
+		V.addConnection("west", B);
+		
+			//Adding connections for India
+		I.addConnection("north", C);
+		I.addConnection("south", T);
+		I.addConnection("east", B);
+		I.addConnection("west", null);
  		
-		//adding items to the location
-		x.addItem(r);
-		x.addItem(p);
+		//adding items to Burma
+		B.addItem(r);
+		B.addItem(p);
+		
+		//adding items to Vietnam
+		Item t = new Item("Oranges", "Vitamin C", "If you're sick.");
+		Item t1 = new Item("Table", "Eat on it", "Wooden");
+		
+		ContainerItem r1 = new ContainerItem("Basket", "Store fruits", " ");
+		ContainerItem r2 = new ContainerItem("Truck", "stores furniture", " ");
+		V.addItem(t);
+		V.addItem(t1);
+		V.addItem(r1);
+		V.addItem(r2);
+		
+		r1.addItem(t);
+		r2.addItem(t1);
+		
 		
 		//creating ContainerItems and adding items to them
 		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
@@ -38,8 +80,8 @@ public class Driver {
 		a.addItem(s);
 		
 		//Adding containers to the location
-		x.addItem(a);
-		x.addItem(b);
+		B.addItem(a);
+		B.addItem(b);
 		
 		
 		//******Game code******
@@ -48,7 +90,7 @@ public class Driver {
 		System.out.println("Type 'look' to see what items are in the location.\n" + 
 				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
 				"    Type 'quit' to quit the game.\n");
-		myLocation = x;
+		myLocation = B;
 		
 		while(true) {
 			System.out.print("Type a command: ");
@@ -68,7 +110,7 @@ public class Driver {
 			case "look": {
 				//If the command is “look”, print out the description of the location and just the names of each items found there
 				if(word.length == 1) {
-					System.out.println("The description of the location is: " + x.getDescription());
+					System.out.println("The description of the location is: " + myLocation.getDescription());
 					System.out.println("The items in the class are: ");
 					myLocation.printNames();
 					System.out.println();
@@ -191,6 +233,21 @@ public class Driver {
 						myInventory.listItems();
 						System.out.println();;
 					}
+				}
+				break;
+			}
+			
+			case "go" : {
+				if(word.length==2) {
+					if(word[1].equals("north") || word[1].equals("south") || word[1].equals("east") || word[1].equals("west")) {
+						myLocation = myLocation.goDirection(word[1]);
+					}
+					else {
+						System.out.println("There is no where to go in that direction. Try another direction.");
+					}
+				}
+				else {
+					System.out.println("Invalid command");
 				}
 				break;
 			}
