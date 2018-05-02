@@ -29,9 +29,6 @@ public class Driver {
 		a.addItem(q);
 		a.addItem(s);
 		
-		//b.addItem(p);
-		//b.addItem(r);
-		
 		x.addItem(a);
 		x.addItem(b);
 		
