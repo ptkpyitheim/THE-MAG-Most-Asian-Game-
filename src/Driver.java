@@ -11,11 +11,6 @@ public class Driver {
 
 		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
 		
-		Item p = new Item("loc", "human", "lab partner");
-		Item q = new Item("knife", "sharp", "Kill a person");
-		Item r = new Item("chair", "wood", "To sit");
-		Item s = new Item("broom", "weapon", "Sweep the floor");
-		
 		//Creating locations
 		Location B = new Location("Burma", " ");
 		Location C = new Location("China", " ");
@@ -55,8 +50,24 @@ public class Driver {
 		I.addConnection("west", null);
  		
 		//adding items to Burma
+		Item p = new Item("loc", "human", "lab partner");
+		Item q = new Item("knife", "sharp", "Kill a person");
+		Item r = new Item("chair", "wood", "To sit");
+		Item s = new Item("broom", "weapon", "Sweep the floor");
+		
 		B.addItem(r);
 		B.addItem(p);
+		
+		//creating ContainerItems and adding items to them
+		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
+		ContainerItem b = new ContainerItem("Blah", "Box", "Store valuable things");
+		a.addItem(q);
+		a.addItem(s);
+		
+		//Adding containers to the location
+		B.addItem(a);
+		B.addItem(b);
+		
 		
 		//adding items to Vietnam
 		Item t = new Item("Oranges", "Vitamin C", "If you're sick.");
@@ -73,23 +84,10 @@ public class Driver {
 		r2.addItem(t1);
 		
 		
-		//creating ContainerItems and adding items to them
-		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
-		ContainerItem b = new ContainerItem("Blah", "Box", "Store valuable things");
-		a.addItem(q);
-		a.addItem(s);
-		
-		//Adding containers to the location
-		B.addItem(a);
-		B.addItem(b);
-		
-		
 		//******Game code******
 		Scanner s1;
 		System.out.println("***** Welcome to the game! *****\n");
-		System.out.println("Type 'look' to see what items are in the location.\n" + 
-				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
-				"    Type 'quit' to quit the game.\n");
+		System.out.println("Type 'help' to see what commands you can use for the game. \n Your are now in the Golden Land, Burma! \n");
 		myLocation = B;
 		
 		while(true) {
@@ -107,6 +105,19 @@ public class Driver {
 			}
 			
 			switch(word[0]) {
+			case "help": {
+				System.out.println("Type 'look' to see what items are in the location.\n" + 
+						"  Type 'examine' followed by the name of the item to learn about the item.\n" +
+						"  Type 'inventory' to see what is in your backpack\n" +
+						"  Type 'take' and the name of the item at current location to add it to your backpack.\n" + 
+						"  Type 'drop' and the name of the item currently in your backpack to drop it from your backpack.\n" +
+						"  Type 'take', the name of the item, 'from', and the container current location to add it to your backpack.\n" +
+						"  Type 'put', the name of the item, 'in', and the container current location to remove the item from your backpack and add it to the container.\n" +
+						"  Type 'go' and the direction you desire to move from one location to another\n" +
+						"  Type 'quit' to quit the game.\n");
+				break;
+			}
+
 			case "look": {
 				//If the command is “look”, print out the description of the location and just the names of each items found there
 				if(word.length == 1) {
@@ -236,18 +247,19 @@ public class Driver {
 				}
 				break;
 			}
-			
+			//word[1].equals("north") || word[1].equals("south") || word[1].equals("east") || word[1].equals("west")
 			case "go" : {
 				if(word.length==2) {
-					if(word[1].equals("north") || word[1].equals("south") || word[1].equals("east") || word[1].equals("west")) {
+					if(myLocation.goDirection(word[1]) != null) {
 						myLocation = myLocation.goDirection(word[1]);
+						System.out.println("You are now in " + myLocation.getName() + " !! \n");
 					}
 					else {
-						System.out.println("There is no where to go in that direction. Try another direction.");
+						System.out.println("There is nothing where to go in that direction. Try another direction. \n");
 					}
 				}
 				else {
-					System.out.println("Invalid command");
+					System.out.println("Invalid command \n Try again by typing go [direction]. \n");
 				}
 				break;
 			}

@@ -112,12 +112,12 @@ public class Location {
 	//*******Methods for HashMap
 	
 	public void addConnection(String s, Location l) {
-		direction.put(s,l);
+		direction.put(s.toLowerCase(),l);
 	}
 	
 	public Location goDirection(String s) {
-		if(direction.containsKey(s)) {
-			return direction.get(s);
+		if(direction.containsKey(s.toLowerCase())) {
+			return direction.get(s.toLowerCase());
 		}
 		return null;
 	}
