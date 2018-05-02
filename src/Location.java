@@ -5,7 +5,6 @@ public class Location {
 	private String name;
 	private String description;
 	private ArrayList<Item> collections; //collections of Items
-	private ArrayList<ContainerItem> containerLoc;
 	private HashMap<String, Location> direction;
 	
 	//Constructor ________________________________________________________________
@@ -13,7 +12,6 @@ public class Location {
 		name = pName;
 		description = pDescription;
 		collections = new ArrayList<Item>();
-		containerLoc = new ArrayList<ContainerItem>();
 		direction = new HashMap<String, Location>();
 	}
 	
@@ -86,28 +84,31 @@ public class Location {
 	
 	//**** Below codes are for the container
 	
-	public void addContainer(ContainerItem s) {
-		containerLoc.add(s);
-	}
-	
 	public boolean containerPresent(String s) {
 		//checks if a container contains in the specified location
 		
-		for(ContainerItem e: containerLoc) {
-			if(s.equals(e.getName())) {
-				return true;
+		for(Item e: collections) {
+			if(e instanceof ContainerItem) {
+				if(s.equals(e.getName())) {
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 	
-	public ContainerItem returnCon(String s){
-		for(ContainerItem e: containerLoc){
-			if(s.equals(e.getName())){
-				return e;
+	public ContainerItem returnCon(String s) {
+		//returns the ContainerItem by taking in the name of the containerItem as the parameter.
+		for(Item e: collections) {
+			if(e instanceof ContainerItem) {
+				if(s.equals(e.getName())) {
+					return ((ContainerItem)e);
+				}
 			}
 		}
 		return null;
 	}
+	
+
 	
 }

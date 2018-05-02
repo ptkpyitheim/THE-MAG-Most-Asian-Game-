@@ -10,10 +10,8 @@ public class Driver {
 	//private static HashMap<String, String> mapLoc; //maps Location with ContainerItems
 
 	public static void main(String[] args) {
-		
-		
-		
-		myLocation = new Location(" ", " ");
+
+		//myLocation = new Location(" ", " ");
 		myInventory = new ContainerItem("Backpack", "Yours", "Store your items");
 		
 		Item p = new Item("loc", "human", "lab partner");
@@ -22,23 +20,20 @@ public class Driver {
 		Item s = new Item("broom", "weapon", "Sweep the floor");
 		
 		Location x = new Location("DePauw", "Sophomore");
-		/*
-		x.addItem(p);
-		x.addItem(q);
+		
 		x.addItem(r);
-		x.addItem(s);
-		*/
+		x.addItem(p);
 		
 		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
 		ContainerItem b = new ContainerItem("Blah", "Box", "Store valuable things");
 		a.addItem(q);
 		a.addItem(s);
 		
-		b.addItem(p);
-		b.addItem(r);
+		//b.addItem(p);
+		//b.addItem(r);
 		
-		x.addContainer(a);
-		x.addContainer(b);
+		x.addItem(a);
+		x.addItem(b);
 		
 		
 		Scanner s1;
@@ -119,11 +114,11 @@ public class Driver {
 				
 					if(myLocation.containerPresent(word[3])) {
 						if(myLocation.returnCon(word[3]).presentItem(word[1])){
-							myInventory.addItem(myLocation.returnCon(word[3]).itemReturn(word[3]));
+							myInventory.addItem(myLocation.returnCon(word[3]).itemReturn(word[1]));
 							myLocation.returnCon(word[3]).remove(word[1]);
 							System.out.println("The item " + word[1] + " is now in your backpack.");
 							System.out.println("The item(s) in your backpack are: ");
-							//myInventory.listItems();
+							myInventory.listItems();
 							System.out.println();
 						}
 						else {
@@ -147,7 +142,7 @@ public class Driver {
 					if(myInventory.presentItem(word[1])) {
 						if(myLocation.containerPresent(word[3])) {
 							myLocation.returnCon(word[3]).addItem(myLocation.returnCon(word[3]).itemReturn(word[1]));
-							myLocation.returnCon(word[3]).remove(word[1]);
+							myInventory.remove(word[1]);
 							System.out.println("The " + word[1] + " is added to the " + word[3]);
 							System.out.println("The " + word[1] + " is now removed from your backpack. \n");
 							System.out.println("The items remaining in your backpack are: ");
