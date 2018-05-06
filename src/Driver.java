@@ -264,7 +264,7 @@ public class Driver {
 				else {
 					System.out.println("Invalid command \n Try again by typing go [direction]. \n");
 				}
-				break;
+				 break;
 			}
 			
 			default: {
