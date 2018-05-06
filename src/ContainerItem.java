@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ContainerItem extends Item {
 	
-	private ArrayList<Item> myList = new ArrayList<Item>();
+	private ArrayList<Item> myList;
 	
 	public ContainerItem(String pName, String pType, String pDescription) {
 		//not sure if we need a constructor for this.
@@ -44,11 +44,14 @@ public class ContainerItem extends Item {
 	public String getDescription() {
 		//A method that overrides the getDescription method to print out the container’s description as well as a list
 		//of the item names in the container.
-		System.out.println(super.getDescription());
+		System.out.println("Decription of the container is: " + super.getDescription() + "\n The items in the container are: ");
+		String ret = "";
+		int i = 0;
 		for(Item e: myList) {
-			return e.getName() + "\n";
+			i++;
+			ret+= i + ") " + e.getName() + "\n";
 		}
-		return null;
+		return ret;
 	}
 	
 	public Item itemReturn(String d) {

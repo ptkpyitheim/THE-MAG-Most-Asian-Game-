@@ -26,28 +26,24 @@ public class Driver {
 		B.addConnection("west", I);
 		
 			//Adding connections for China
-		C.addConnection("north", null);
 		C.addConnection("south", B);
 		C.addConnection("east", V);
 		C.addConnection("west", I);
 		
 			//Adding connections for Thailand
 		T.addConnection("north", B);
-		T.addConnection("south", null);
 		T.addConnection("east", V);
 		T.addConnection("west", I);
 		
 			//Adding connections for Vietnam
 		V.addConnection("north", C);
 		V.addConnection("south", T);
-		V.addConnection("east",null);
 		V.addConnection("west", B);
 		
 			//Adding connections for India
 		I.addConnection("north", C);
 		I.addConnection("south", T);
 		I.addConnection("east", B);
-		I.addConnection("west", null);
  		
 		//adding items to Burma
 		Item p = new Item("loc", "human", "lab partner");
@@ -58,13 +54,13 @@ public class Driver {
 		B.addItem(r);
 		B.addItem(p);
 		
-		//creating ContainerItems and adding items to them
+		//creating ContainerItems in Burma and adding items.
 		ContainerItem a = new ContainerItem("Cabinet", "Kitchen", "Place where you cook");
 		ContainerItem b = new ContainerItem("Blah", "Box", "Store valuable things");
 		a.addItem(q);
 		a.addItem(s);
 		
-		//Adding containers to the location
+		//Adding containers to Burma.
 		B.addItem(a);
 		B.addItem(b);
 		
@@ -106,15 +102,7 @@ public class Driver {
 			
 			switch(word[0]) {
 			case "help": {
-				System.out.println("Type 'look' to see what items are in the location.\n" + 
-						"  Type 'examine' followed by the name of the item to learn about the item.\n" +
-						"  Type 'inventory' to see what is in your backpack\n" +
-						"  Type 'take' and the name of the item at current location to add it to your backpack.\n" + 
-						"  Type 'drop' and the name of the item currently in your backpack to drop it from your backpack.\n" +
-						"  Type 'take', the name of the item, 'from', and the container current location to add it to your backpack.\n" +
-						"  Type 'put', the name of the item, 'in', and the container current location to remove the item from your backpack and add it to the container.\n" +
-						"  Type 'go' and the direction you desire to move from one location to another\n" +
-						"  Type 'quit' to quit the game.\n");
+				myLocation.getHelp();
 				break;
 			}
 
@@ -135,16 +123,25 @@ public class Driver {
 			case "examine": {
 				//If the command is “examine NAME”, get the item with the given name from the location 
 				//and print its name and description to the screen.
-				
+				if(word.length==2) {
 				if(!myLocation.itemPresent(word[1])) {
 					System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
 				}
 				else {
-					String n = "Name: " + myLocation.returnItem(word[1]).getName();
-					n += "\n" + "Description: " + myLocation.returnItem(word[1]).getDescription() + "\n";
-					System.out.println(n);
+					if(myLocation.containerPresent(word[1])) {
+						System.out.println(myLocation.returnCon(word[1]).getDescription());
+					}
+					else {
+						String n = "Name: " + myLocation.returnItem(word[1]).getName();
+						n += "\n" + "Description: " + myLocation.returnItem(word[1]).getDescription() + "\n";
+						System.out.println(n);
+					}
 				}
 				break;
+			}
+				else {
+					System.out.println("Please type 'examine' followed by the 'name' of the item. \n");
+				}
 			}
 			
 			case "take": {
@@ -209,7 +206,7 @@ public class Driver {
 							System.out.println();
 						}
 						else {
-							System.out.println("The container you are trying to put doesn't exist. Please try another.");
+							System.out.println("The container you are trying to put doesn't exist. Please try another. \n");
 						}
 					}
 					else {
@@ -223,14 +220,20 @@ public class Driver {
 			case "drop": {
 			//If there is an item with the given [name] in your character’s inventory, remove it from the
 			//character’s inventory and add it to the current location. 
-				if(!myInventory.presentItem(word[1])) {
-					System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
+				if(word.length==2) {
+					if(!myInventory.presentItem(word[1])) {
+						System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
+					}
+					else {
+						myLocation.addItem(myInventory.itemReturn(word[1]));
+						myInventory.remove(word[1]);
+						System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+					}
 				}
 				else {
-					myLocation.addItem(myInventory.itemReturn(word[1]));
-					myInventory.remove(word[1]);
-					System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+					System.out.println("Please type 'drop' followed by the name of an item in your backpack(inventory). \n");
 				}
+				
 				
 				break;
 			}

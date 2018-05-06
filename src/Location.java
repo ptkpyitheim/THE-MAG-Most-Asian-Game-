@@ -7,6 +7,19 @@ public class Location {
 	private ArrayList<Item> collections; //collections of Items
 	private HashMap<String, Location> direction;
 	
+	//getHelp method for the driver
+	public void getHelp() {
+		System.out.println("Type 'look' to see what items are in the location.\n" + 
+				"  Type 'examine' followed by the name of the item to learn about the item.\n" +
+				"  Type 'inventory' to see what is in your backpack\n" +
+				"  Type 'take' and the name of the item at current location to add it to your backpack.\n" + 
+				"  Type 'drop' and the name of the item currently in your backpack to drop it from your backpack.\n" +
+				"  Type 'take', the name of the item, 'from', and the container current location to add it to your backpack.\n" +
+				"  Type 'put', the name of the item, 'in', and the container current location to remove the item from your backpack and add it to the container.\n" +
+				"  Type 'go' and the direction you desire to move from one location to another\n" +
+				"  Type 'quit' to quit the game.\n");
+	}
+	
 	//Constructor ________________________________________________________________
 	public Location(String pName, String pDescription) {
 		name = pName;
