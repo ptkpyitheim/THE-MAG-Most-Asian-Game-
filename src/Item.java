@@ -3,11 +3,13 @@ public class Item {
 	private String name;
 	private String type;
 	private String description;
+	private boolean state;
 	
-	public Item(String pName, String pType, String pDescription) {
+	public Item(String pName, String pType, String pDescription, boolean view) {
 		name = pName;
 		type = pType;
 		description = pDescription;
+		state = view;
 	}
 	
 	//Getters ________________________________________________________________
@@ -20,6 +22,9 @@ public class Item {
 	public String getDescription() {
 		return description;
 	}
+	public boolean getState(){
+		return state;
+	}
 	
 	//Setters ________________________________________________________________
 	public void setName(String pName) {
@@ -30,6 +35,9 @@ public class Item {
 	}
 	public void setDescription(String pDescription) {
 		description = pDescription;
+	}
+	public void setState(boolean pState){
+		state = pState;
 	}
 	
 	//toString() method ________________________________________________________________

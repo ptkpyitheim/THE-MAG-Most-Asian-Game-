@@ -4,8 +4,11 @@ import java.util.HashMap;
 public class Location {
 	private String name;
 	private String description;
+	private String question;
+	private String answer;
 	private ArrayList<Item> collections; //collections of Items
 	private HashMap<String, Location> direction;
+	private boolean visibility;
 	
 	//getHelp method for the driver
 	public void getHelp() {
@@ -21,12 +24,16 @@ public class Location {
 	}
 	
 	//Constructor ________________________________________________________________
-	public Location(String pName, String pDescription) {
+	public Location(String pName, String pDescription, String pQuestion, String pAns, boolean view) {
 		name = pName;
 		description = pDescription;
+		question = pQuestion;
+		answer = pAns;
 		collections = new ArrayList<Item>();
 		direction = new HashMap<String, Location>();
+		visibility = view;
 	}
+	
 	
 	//Getters ________________________________________________________________
 	public String getName() {
@@ -35,12 +42,24 @@ public class Location {
 	public String getDescription() {
 		return description;
 	}
+	public String getQuestion() {
+		return question;
+	}
+	public String getAnswer() {
+		return answer;
+	}
 	//Setters ________________________________________________________________
 	public void setName(String pName) {
 		name = pName;
 	}
 	public void setDescription(String pDescription) {
 		description = pDescription;
+	}
+	public void setQuestion(String pQuestion) {
+		question = pQuestion;
+	}
+	public void setAnswer(String pAns) {
+		answer = pAns;
 	}
 	
 	//Methods ________________________________________________________________
@@ -91,7 +110,13 @@ public class Location {
 		int i = 0;	
 		for(Item e: collections) {
 				i++;
-				System.out.println(i + ") " + e.getName());
+				System.out.print(i + ") ");
+				if(e instanceof ContainerItem) {
+					System.out.println(((ContainerItem)e).getName() + " -- stores food you don't want");
+				}
+				else {
+					System.out.println(e.getName());
+				}
 			}
 	}
 	
@@ -114,7 +139,7 @@ public class Location {
 		//returns the ContainerItem by taking in the name of the containerItem as the parameter.
 		for(Item e: collections) {
 			if(e instanceof ContainerItem) {
-				if(s.equals(e.getName())) {
+				if(s.toLowerCase().equals(e.getName().toLowerCase())) {
 					return ((ContainerItem)e);
 				}
 			}
@@ -122,7 +147,7 @@ public class Location {
 		return null;
 	}
 	
-	//*******Methods for HashMap
+	//*******Methods for HashMap directions
 	
 	public void addConnection(String s, Location l) {
 		direction.put(s.toLowerCase(),l);
@@ -134,7 +159,6 @@ public class Location {
 		}
 		return null;
 	}
-
-
+	
 	
 }
