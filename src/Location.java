@@ -6,9 +6,10 @@ public class Location {
 	private String description;
 	private String question;
 	private String answer;
-	private ArrayList<Item> collections; //collections of Items
-	private HashMap<String, Location> direction;
-	private boolean visibility;
+	private ArrayList<Item> collections; //collections of Items in the location
+	private HashMap<String, Location> direction; //connecting the directions
+	private boolean visibility; //For certain locations to set true to move on
+	private boolean checkAns; //If answered, give another question
 	
 	//getHelp method for the driver
 	public void getHelp() {
@@ -32,6 +33,7 @@ public class Location {
 		collections = new ArrayList<Item>();
 		direction = new HashMap<String, Location>();
 		visibility = view;
+		checkAns = false;
 	}
 	
 	
@@ -48,6 +50,10 @@ public class Location {
 	public String getAnswer() {
 		return answer;
 	}
+	public boolean getCheckAns() {
+		return checkAns;
+	}
+	
 	//Setters ________________________________________________________________
 	public void setName(String pName) {
 		name = pName;
@@ -61,6 +67,9 @@ public class Location {
 	public void setAnswer(String pAns) {
 		answer = pAns;
 	}
+	public void setCheckAns(boolean pCheckAns) {
+		checkAns = pCheckAns;
+	}
 	
 	//Methods ________________________________________________________________
 	
@@ -72,7 +81,7 @@ public class Location {
 	public boolean itemPresent(String s) { 
 		// return whether an item is present in the location’s collection by searching using the item’s name
 		for(Item e: collections) {
-			if(e.getName().equals(s)) {
+			if(s.toLowerCase().equals(e.getName().toLowerCase())) {
 				return true;
 			}
 		}
@@ -82,7 +91,7 @@ public class Location {
 	public Item returnItem(String d) {
 		// return the item (if it’s present) from the location’s collection by searching using the item’s name
 		for(Item e: collections) {
-			if(e.getName().equals(d)) {
+			if(e.getName().toLowerCase().equals(d.toLowerCase())) {
 				return e;
 			}
 		}
@@ -97,7 +106,7 @@ public class Location {
 	public Item removeItem(String s) {
 		 //remove (and return) the item within a location’s collection by searching using the item’s name.
 		for (Item e: collections) {
-			if(e.getName().equals(s)) {
+			if(e.getName().toLowerCase().equals(s.toLowerCase())) {
 				collections.remove(e);
 				return e;
 			}
@@ -112,7 +121,7 @@ public class Location {
 				i++;
 				System.out.print(i + ") ");
 				if(e instanceof ContainerItem) {
-					System.out.println(((ContainerItem)e).getName() + " -- stores food you don't want");
+					System.out.println(((ContainerItem)e).getName());
 				}
 				else {
 					System.out.println(e.getName());

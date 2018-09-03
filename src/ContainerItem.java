@@ -15,10 +15,11 @@ public class ContainerItem extends Item {
 		myList.add(s);
 	}
 	
+	
 	public Item remove(String s) {
 		//A method to remove and return an Item from the collection when the method is provided the item’s name
 		for(Item e: myList) {
-			if(e.getName().equals(s)) {
+			if(e.getName().toLowerCase().equals(s.toLowerCase())) {
 				myList.remove(e);
 				return e;
 			}
@@ -63,7 +64,7 @@ public class ContainerItem extends Item {
 	public Item itemReturn(String d) {
 		// return the item (if it’s present) from the ContainerItem’s ArrayList by searching using the item’s name
 		for(Item e: myList) {
-			if(e.getName().equals(d)) {
+			if(e.getName().toLowerCase().equals(d.toLowerCase())) {
 				return e;
 			}
 		}

@@ -6,8 +6,9 @@ public class Driver {
 	
 	public static Location myLocation = null; //to keep track of location
 	public static ContainerItem myInventory = null; //to keep track of Inventory
-	public static int points; //Points the character will have. If the charactor has zero points he/she loses.
+	public static int points; //Points the character will have. If the character has zero points he/she loses.
 	public static int MAX_ITEMS = 5; //Max items you can carry in your backpack.
+	public static ContainerItem trashCan = null;
  
 	public static void main(String[] args) {
 
@@ -21,7 +22,7 @@ public class Driver {
 		Location India = new Location("India", " ", "What festival is also known as the 'festival of colours', a spring festival celebrated all across the Indian subcontinent?", "Holi", true);
 		Location Laos = new Location("Laos", " ", "What is the major religion in Laos?", "Buddhism", true);
 		Location Taiwan = new Location("Taiwan", " ", "What is the capital of Taiwan?", "Taipei", true);
-		Location Philipines = new Location("Philipines", " ", "What is the currency of Phillipines?", "Peso", true);
+		Location Philippines = new Location("Philippines", " ", "What is the currency of Phillipines?", "Peso", true);
 		Location Malaysia = new Location("Malaysia", " ", "What is both a city and a country located in the southern tip of Peninsular Malaysia?", "Singapore", true);
 		Location Pakistan = new Location("Pakistan", " ", "What is the year of partition of Indian and Pakistan?", "1947", true);
 		Location America = new Location("America", " ", "What is American Independence Year?", "1776", true);
@@ -62,86 +63,76 @@ public class Driver {
 		
 			//Adding connections for Vietnam
 		Vietnam.addConnection("west", Laos);
-		Vietnam.addConnection("east", Philipines);
+		Vietnam.addConnection("east", Philippines);
 		Vietnam.addConnection("north", Taiwan);
 		Vietnam.addConnection("south", Malaysia);
 		
 			//Adding connections for Taiwan
-		Taiwan.addConnection("south", Philipines);
+		Taiwan.addConnection("south", Philippines);
 		Taiwan.addConnection("east", America);
 		Taiwan.addConnection("west", Vietnam);
 		
-			//Adding connections for Philipines
-		Philipines.addConnection("north", Taiwan);
-		Philipines.addConnection("south", Malaysia);
-		Philipines.addConnection("east", America);
-		Philipines.addConnection("west", Vietnam);
+			//Adding connections for Philippines
+		Philippines.addConnection("north", Taiwan);
+		Philippines.addConnection("south", Malaysia);
+		Philippines.addConnection("east", America);
+		Philippines.addConnection("west", Vietnam);
 		
 			//Adding connections for Malaysia
-		Malaysia.addConnection("north", Philipines);
+		Malaysia.addConnection("north", Philippines);
 		Malaysia.addConnection("east", America);
 		Malaysia.addConnection("west", Vietnam);
 		
 			//Adding connections for America
 		America.addConnection("north", Taiwan);
 		America.addConnection("south", Malaysia);
-		America.addConnection("west", Philipines);
+		America.addConnection("west", Philippines);
 		
 		//__________________________________________________________________________________________
 		
 		// Adding items and containerItem ***************
 		//adding containerItem (trashCan)
-		ContainerItem trashCan = new ContainerItem("TrashCan", "Can", "store trash food", true);
+		trashCan = new ContainerItem("TrashCan", "Can", "store trash food", true);
  		
 		//adding items to Burma
 		Item Mohinga = new Item("Mohinga", "Traditional noodles with fish based soup", "Breakfast", true);
 		Burma.addItem(Mohinga);
-		Burma.addItem(trashCan);
-		
+				
 		//adding items to Vietnam
 		Item Pho = new Item("Pho", "noodle soup", "Noodles with beef or chicken broth cooked in long time", true);
 		Vietnam.addItem(Pho);
-		Vietnam.addItem(trashCan);
-		
+				
 		//adding items to China
 		Item Dumplings = new Item("Dumplings", "Meat Ball", "taste better with sauce", false);
 		China.addItem(Dumplings);
-		China.addItem(trashCan);
-		
+				
 		//adding items to India
 		Item Biryani = new Item("Biryani", "Spicy Rice", "Made with spices, rice, and meat", true);
 		India.addItem(Biryani);
-		India.addItem(trashCan);
-		
+				
 		//adding items to Pakistan
 		Item Chapati = new Item("Chapati", "Unleavened flatbread", "cooked on a flat skiller", false);
 		Pakistan.addItem(Chapati);
-		Pakistan.addItem(trashCan);
-		
+				
 		//adding items to Thailand
 		Item PadThai = new Item("PadThai", "Stir fried rice noodle", "Street food in Thailand", true);
 		Thailand.addItem(PadThai);
-		Thailand.addItem(trashCan);
-		
+				
 		//adding items to Laos
 		Item Larb = new Item("Larb", "Lao meat salad", "unofficial national dish of Laos", true);
 		Laos.addItem(Larb);
-		Laos.addItem(trashCan);
-		
+				
 		//adding items to Phillipines
 		Item Sinigang = new Item("Sinigang", "Soup", "uSour and savoury taste", true);
-		Philipines.addItem(Sinigang);
-		Philipines.addItem(trashCan);
+		Philippines.addItem(Sinigang);
 		
 		//adding items to Malaysia
-		Item NasiLemak = new Item("Nasi Lemak", "food", "Rice dish cooked in coconut milk and pandan leaf", true);
+		Item NasiLemak = new Item("NasiLemak", "food", "Rice dish cooked in coconut milk and pandan leaf", true);
 		Malaysia.addItem(NasiLemak);
-		Malaysia.addItem(trashCan);
 		
 		//adding items to Taiwan
-		Item BubbleTea = new Item("Bubble Tea", "drink", "tea with mixed with fruit or milk", true);
+		Item BubbleTea = new Item("BubbleTea", "drink", "tea with mixed with fruit or milk", true);
 		Taiwan.addItem(BubbleTea);
-		Taiwan.addItem(trashCan);
 		
 		//__________________________________________________________________________________________
 		
@@ -150,7 +141,7 @@ public class Driver {
 		Scanner s1;
 		System.out.println("***** Welcome to the MOST ASIAN GAME you'll ever play! *****\n");
 		System.out.println("Welcome to the Golden Land, Myanmar(Burma)! From this destination, you will be exploring South East Asian countries.");
-		System.out.println("In order to get to the final destination, you will need some specific items to get through each stage of the game.");
+		System.out.println("In order to get to the final destination to win, you will need some specific items to get through each stage of the game. \nYour final destination is America; refer to the map so see how to get there.");
 		System.out.println("In the command line below, try typing 'go north' to see what is there! \n");
 		
 		//initializing the world
@@ -162,21 +153,29 @@ public class Driver {
 			s1 = new Scanner(System.in);
 			String userSentence = s1.nextLine();
 			String word[] = userSentence.split(" ");
-		
-			if(word[0].equals("quit")) {
-				//If the command is “quit”, the loop should exit and the program ends
-				if(word.length==1) {
-					System.out.println("You have successfully quit the game.");
-					break;
-				}
-			}
 			
 			switch(word[0]) {
+			
 			case "help": {
 				myLocation.getHelp();
 				break;
 			}
+			
+			//INVENTORY
+			case "inventory": {
+				if (word.length==1) {
+					if(myInventory.itemsCount() == 0) {
+						System.out.println(" There is no Items in your backpack \n");
+					}
+					else {
+						myInventory.listItems();
+						System.out.println();;
+					}
+				}
+				break;
+			}
 
+			//LOOK
 			case "look": {
 				//If the command is “look”, print out the description of the location and just the names of each items found there
 				if(word.length == 1) {
@@ -188,65 +187,80 @@ public class Driver {
 					if(myLocation.getName().equals("Thailand")){
 						if(myInventory.presentItem("Dumplings")){
 							Dumplings.setState(true);
+							System.out.println("*** You have set Dumplings to true. You have access to Pakistan now. *** \n");
 						}
 					}
 					else if(myLocation.getName().equals("Burma")){
 						if(myInventory.presentItem("Chapati")){
 							Chapati.setState(true);
+							System.out.println("*** You have set Chapati to true. You have access to Vietnam now. *** \n");
 						}
 					}
-				}
-				else {
-					System.out.println("I don't know how to do that. Please try another command listed above. \n");
 				}
 				break;
 			}
 			
+			//EXAMINE
 			case "examine": {
 				//If the command is “examine NAME”, get the item with the given name from the location 
 				//and print its name and description to the screen.
 				if(word.length==2) {
-				if(!myLocation.itemPresent(word[1])) {
-					System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
-				}
-				else {
-					if(myLocation.containerPresent(word[1])) {
-						System.out.println(myLocation.returnCon(word[1]).getDescription());
-					}
-					else {
+					if(myLocation.itemPresent(word[1])) {
 						String n = "Name: " + myLocation.returnItem(word[1]).getName();
 						n+= "\n" + "Type: " + myLocation.returnItem(word[1]).getType();
 						n += "\n" + "Description: " + myLocation.returnItem(word[1]).getDescription() + "\n";
 						System.out.println(n);
 					}
+					else if(myInventory.presentItem(word[1])) {
+						String x = "Name: " + myInventory.itemReturn(word[1]).getName();
+						x+= "\n" + "Type: " + myInventory.itemReturn(word[1]).getType();
+						x += "\n" + "Description: " + myInventory.itemReturn(word[1]).getDescription() + "\n";
+						System.out.println(x);
+					}
+					else if (word[1].toLowerCase().equals("TrashCan".toLowerCase())) {
+						if(trashCan.itemsCount() > 0) {
+							trashCan.listItems();
+							System.out.println();
+						}
+						else {
+							System.out.println("There are no items in your trashCan yet. \n");
+						}
+					}
+					else {
+						System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");					
+					}
 				}
-				break;
-			}
 				else {
 					System.out.println("Please type 'examine' followed by the 'name' of the item. \n");
 				}
+			break;
 			}
 			
+			//TAKE
 			case "take": {
 				//If there is an item with the [name] in your character’s current location, remove this item from
 				//the current location and add it to the character’s inventory
 				
 				if(word.length == 2) {
-					if(!myLocation.itemPresent(word[1])) {
+					if(!myLocation.itemPresent(word[1].toLowerCase())) {
 						System.out.println("Item is not in this location." + "\n" + "Please try again below. \n");
 					}
-					else if(word[1].equals("TrashCan")) {
-						System.out.println("You cannot add TrashCan to your backpack. TrashCan is used to throw away foods you don't want or if you have more than 5 food items in your backpack. \n You can access the TrashCan no matter which country you're at. \n  You can also grab food from the trashCan using the command 'take [name of the food] from TrashCan' \n");
-					}
 					else {
-						System.out.println(myLocation.returnItem(word[1]));
-						myInventory.addItem(myLocation.returnItem(word[1]));
-						myLocation.removeItem(word[1]);
-						System.out.println("The food " + word[1] + " is now in your backpack.");
-						System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
-						System.out.println("The food(s) in your backpack are: ");
-						myInventory.listItems();
-						System.out.println();
+						if(myInventory.itemsCount() > MAX_ITEMS-1) {
+							System.out.println("You cannot add more than " + MAX_ITEMS + " foods in your backpack. \n Type 'inventory' to see what items you have in the backpack. \nIf you would like to drop a food in the TrashCan, type 'drop [name of the food]. \n");
+						}
+						else
+						{
+							System.out.println(myLocation.returnItem(word[1]));
+							myInventory.addItem(myLocation.returnItem(word[1]));
+							myLocation.removeItem(word[1]);
+							System.out.println("The food " + word[1] + " is now in your backpack.");
+							System.out.println("You have " + myInventory.itemsCount() + " item(s) in your backpack. \n");
+							System.out.println("The food(s) in your backpack are: ");
+							myInventory.listItems();
+							System.out.println();
+						}
+			
 					}
 				}
 				else if(word.length == 4 && word[2].equals("from")) {
@@ -279,6 +293,7 @@ public class Driver {
 				
 			}
 			
+			//PUT
 			case "put": {
 				//If there is an item with the given [name] in your character’s inventory, remove
 				//it from the character’s inventory and add it to the specified [container] at the character’s current location. 
@@ -295,17 +310,20 @@ public class Driver {
 							System.out.println();
 						}
 						else {
-							System.out.println("The container you are trying to put doesn't exist. Please try TrashCan. \n");
+							System.out.println("The container you are trying to put doesn't exist.\n");
 						}
 					}
 					else {
 							System.out.println("The food doesn't exist in your backpack. \n");
 					}
-				}
+			}
+			else {
+				System.out.println("Please type 'put [name of the food] in [name of the container]'.");
+			}
 			break;
 			}
 				
-			
+			//DROP
 			case "drop": {
 			//If there is an item with the given [name] in your character’s inventory, remove it from the
 			//character’s inventory and add it to the Trashcan. 
@@ -329,19 +347,7 @@ public class Driver {
 				break;
 			}
 			
-			case "inventory": {
-				if (word.length==1) {
-					if(myInventory.itemsCount() == 0) {
-						System.out.println(" There is no Items in your backpack \n");
-					}
-					else {
-						myInventory.listItems();
-						System.out.println();;
-					}
-				}
-				break;
-			}
-			//word[1].equals("north") || word[1].equals("south") || word[1].equals("east") || word[1].equals("west")
+			//GO
 			case "go" : {
 				Scanner sc;
 				String ans;
@@ -355,7 +361,7 @@ public class Driver {
 										myLocation = myLocation.goDirection(word[1]);
 									}
 									else{
-										System.out.println("You need to set Dumplings to true(try go Thailand) to go to Pakistan");
+										System.out.println("You need to set Dumplings to true(try going Thailand and type 'look') to get access to Pakistan");
 									}
 								}
 								else {
@@ -373,7 +379,7 @@ public class Driver {
 										myLocation = myLocation.goDirection(word[1]);
 									}
 									else{
-										System.out.println("You need to set Chapati to true(Try go Pakistan) to go to Vietnam");
+										System.out.println("You need to set Chapati to true(Try going Burma and type 'look') to get access to Vietnam");
 									}
 								}
 								else {
@@ -384,48 +390,85 @@ public class Driver {
 								myLocation = myLocation.goDirection(word[1]);
 							}
 						}
-						else if(myLocation.getName().equals("America")) {
-							System.out.println("You have reached the final destination. YAYYYYY!!!");
+						else if(myLocation.getName().equals("Taiwan")) {
+							if(word[1].equals("east")) {
+							System.out.println("You have reached the final destination. YAYYYYY!!! \n");
+							System.out.println("Please type 'quit' below to end the game and restart again. \n");
 							break;
+							}
+							else {
+								myLocation = myLocation.goDirection(word[1]);
+							}
+						}
+						else if(myLocation.getName().equals("Philippines")) {
+							if(word[1].equals("east")) {
+							System.out.println("You are at the Philippines airport to go on board to go to your final destination, " + America.getName() + "!!!! YAYYYYY!!! \n");
+							System.out.println("Prepare for your next chapter of life in " + America.getName() + "!!. You have completed our MAG (The Most Asian Game). \nPlease type 'quit' below to end the game and restart again. \n");
+							break;
+							}
+							else {
+								myLocation = myLocation.goDirection(word[1]);
+							}
+						}
+						else if(myLocation.getName().equals("Malaysia")) {
+							if(word[1].equals("east")) {
+							System.out.println("You have reached the final destination. YAYYYYY!!! \n");
+							System.out.println("Please type 'quit' below to end the game and restart again. \n");
+							break;
+							}
+							else {
+								myLocation = myLocation.goDirection(word[1]);
+							}
 						}
 					
 						else {
 							myLocation = myLocation.goDirection(word[1]);
 						}
+						
+						
 						System.out.println("You are now in " + myLocation.getName() + " !!");
+						if (!myLocation.getCheckAns()) {
+							
+						}
+						else {
+							System.out.println("You have already answered the required question for the country that you're in");
+						}
+						
 						System.out.println("	Please answer the question below in order to pass this country.");
+						
 						while(true) {
-						System.out.println("		Question: " + myLocation.getQuestion());
-						System.out.print("		Answer: ");
-						sc = new Scanner(System.in);
-						ans = sc.next();
-						String answer[] = ans.split(" ");
-							if(answer.length == 1) {
-								if(ans.toLowerCase().equals(myLocation.getAnswer().toLowerCase())) {
-									System.out.println("Your answer is correct! Type 'look' to see what signature foods " + myLocation.getName() + " has.");
-									System.out.println("Or try going to another direction and explore more! \n");
-									break;
-								}
-								else {
-									attempt++;
-									points--;
-									if(points > 0) {
-										System.out.println("\nYour answer is incorrect. You have attempted " + attempt + " time(s).");
-										System.out.println("You got deducted a point. You have " + points + " point(s) remaining. REMEMBER: You lose if you have zero points left");
-										System.out.println("Please try again below. \n");
-									}
-									else {
-										System.out.println("\nI'm sorry. You have lost the game. You lost all your points.");
-										System.out.println("Please type 'quit' below to end the game and restart again. \n");
+							
+							System.out.println("		Question: " + myLocation.getQuestion());
+							System.out.print("		Answer: ");
+							sc = new Scanner(System.in);
+							ans = sc.next();
+							String answer[] = ans.split(" ");
+								if(answer.length == 1) {
+									if(ans.toLowerCase().equals(myLocation.getAnswer().toLowerCase())) {
+										myLocation.setCheckAns(true);
+										System.out.println("Your answer is correct! Type 'look' to see what signature foods " + myLocation.getName() + " has.");
+										System.out.println("Or try going to another direction and explore more! \n");
 										break;
 									}
+									else {
+										attempt++;
+										points--;
+										if(points > 0) {
+											System.out.println("\nYour answer is incorrect. You have attempted " + attempt + " time(s).");
+											System.out.println("You got deducted a point. You have " + points + " point(s) remaining. REMEMBER: You lose if you have zero points left");
+											System.out.println("Please try again below. \n");
+										}
+										else {
+											System.out.println("\nI'm sorry. You have lost the game. You lost all your points.");
+											System.exit(0);
+										}
+									}
 								}
-							}
-							
-						else {
-								System.out.println("Please give only one word answer.");
-								break;
-							}
+								
+							else {
+									System.out.println("Please give only one word answer.");
+									break;
+								}
 						}
 						break;
 					}
@@ -436,13 +479,13 @@ public class Driver {
 				else {
 					System.out.println("Invalid command \n Try again by typing go [direction]. \n");
 				}
-				 break;
+			break; //break statement for case "go"
 			}
 			
 			default: {
 				//if nothing else matches this is what you should do.
 				//If the command is something else
-				System.out.println("I don't know how to do that. Please try another command listed above.\nRemember: Case sensitive words.\nYou can also type 'help' to see what commands are available.");
+				System.out.println("I don't know how to do that. Please try another command listed above.\nRemember: Case sensitive words.\nYou can also type 'help' to see what commands are available. \n");
 				break;
 			}
 			};
