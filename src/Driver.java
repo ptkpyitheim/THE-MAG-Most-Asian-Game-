@@ -180,22 +180,28 @@ public class Driver {
 				//If the command is “look”, print out the description of the location and just the names of each items found there
 				if(word.length == 1) {
 					System.out.println("The description of the location is: " + myLocation.getDescription());
-					System.out.println("The item(s) in " + myLocation.getName() + " are: ");
-					myLocation.printNames();
-					System.out.println("\nYou can type 'take' [name of the food] to put it in your backpack! You never know when it will be useful.");
-					System.out.println("You can also type 'take' [name of the food] from [name of the container] (if present in the country) \n");
-					if(myLocation.getName().equals("Thailand")){
-						if(myInventory.presentItem("Dumplings")){
-							Dumplings.setState(true);
-							System.out.println("*** You have set Dumplings to true. You have access to Pakistan now. *** \n");
+					if (myLocation.numItems() != 0) {
+						System.out.println("The item(s) in " + myLocation.getName() + " are: ");
+						myLocation.printNames();
+						System.out.println("\nYou can type 'take' [name of the food] to put it in your backpack! You never know when it will be useful.");
+						System.out.println("You can also type 'take' [name of the food] from [name of the container] (if present in the country) \n");
+						if(myLocation.getName().equals("Thailand")){
+							if(myInventory.presentItem("Dumplings")){
+								Dumplings.setState(true);
+								System.out.println("*** You have set Dumplings to true. You have access to Pakistan now. *** \n");
+							}
+						}
+						else if(myLocation.getName().equals("Burma")){
+							if(myInventory.presentItem("Chapati")){
+								Chapati.setState(true);
+								System.out.println("*** You have set Chapati to true. You have access to Vietnam now. *** \n");
+							}
 						}
 					}
-					else if(myLocation.getName().equals("Burma")){
-						if(myInventory.presentItem("Chapati")){
-							Chapati.setState(true);
-							System.out.println("*** You have set Chapati to true. You have access to Vietnam now. *** \n");
-						}
+					else {
+						System.out.println("\n The location does not have any food. Either you have already taken it or it's in the trash. \n");
 					}
+					
 				}
 				break;
 			}
